@@ -1,6 +1,11 @@
 package main
 
-import "fmt"
+// import "fmt"
+// import "strings"
+import (
+  "fmt"
+  "strings"
+)
 
 func main() {
   /*
@@ -326,4 +331,58 @@ func main() {
       }
       fmt.Println("")
     }
+
+
+
+
+
+
+  /*
+    ARRAY
+  */
+  fmt.Println("\n\n")
+
+
+  // Array
+  var number [4]int
+  number = [4]int{1,2,3,4}
+
+  var names = [3]string{"Farrel", "Athaillah", "Putra"}
+
+  fmt.Printf("%#v \n", number)
+  fmt.Printf("%v \n", number)
+  fmt.Printf("%#v \n", names)
+  fmt.Printf("%v \n", names)
+
+
+  // Modify Element Through Index
+  var fruits = [3]string{"Apple", "Banana", "Mango"}
+  fruits[0] = "Strawberry"
+  fruits[1] = "Avocado"
+
+  fmt.Printf("%#v \n", fruits)
+
+
+  // Loop Through Element (range loop)
+  for i, v := range fruits{
+    fmt.Printf("Index: %d, Value: %s\n", i, v)
+  }
+
+  fmt.Println(strings.Repeat("#", 25))
+
+  // Loop Through Element (for loop)
+  for i := 0; i < len(fruits); i++ {
+    fmt.Printf("Index: %d, Value: %s\n", i, fruits[i])
+  }
+
+
+  // Multidimensional Array
+  balances := [2][3]int{{5, 6, 7}, {8, 9, 10}}
+
+  for _, arr := range balances {
+    for _, val := range arr {
+      fmt.Printf("%d ", val)
+    }
+    fmt.Println()
+  }
 }
