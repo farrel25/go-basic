@@ -385,4 +385,118 @@ func main() {
     }
     fmt.Println()
   }
+
+
+
+
+
+  /*
+    SLICE
+  */
+  fmt.Println("\n\n")
+
+
+  // Slice
+  var fruits2 = []string{"apple", "banana", "mango"}
+  fmt.Println(fruits2)
+  fmt.Printf("%#v\n", fruits2)
+
+
+  // make function
+  var fruits3 = make([]string, 3)
+  fmt.Printf("%#v\n", fruits3)
+
+
+  // append function
+  // fruits3[0] = "orange"
+  // fruits3[1] = "pineapple"
+  // fruits3[2] = "avocado"
+  fruits3 = append(fruits3, "orange", "pineapple", "avocado")
+
+  fmt.Printf("%#v\n", fruits3)
+
+
+  // append function with ellipsis (...)
+  var fruits4 = []string{"starfruit", "watermelon"}
+  fruits3 = append(fruits3, fruits4...)
+
+  fmt.Printf("%#v\n", fruits3)
+
+
+  // copy function
+  var fruits5 = []string{"blackberry", "blackcurrant", "blueberry"}
+  var fruits6 = []string{"cherry", "coconut", "durian"}
+
+  nn := copy(fruits5, fruits6)
+
+  fmt.Println("Fruits5 =>", fruits5)
+  fmt.Println("Fruits6 =>", fruits6)
+  fmt.Println("Copied elements =>", nn)
+
+
+  // Slicing
+  var fruits7 = []string{"grape", "guava", "plum", "kiwi", "lemon"}
+  fmt.Printf("fruits7 => %#v\n", fruits7)
+
+  var fruits71 = fruits7[1:4]
+  fmt.Printf("fruits7[1:4] => %#v\n", fruits71)
+
+  var fruits72 = fruits7[0:]
+  fmt.Printf("fruits7[0:] => %#v\n", fruits72)
+
+  var fruits73 = fruits7[:3]
+  fmt.Printf("fruits7[:3] => %#v\n", fruits73)
+
+  var fruits74 = fruits7[:]
+  fmt.Printf("fruits7[:] => %#v\n", fruits74)
+
+
+  // Combining slicing and append
+  var fruits8 = []string{"lime", "lychee", "mango", "melon", "orange"}
+  fruits8 = append(fruits8[:3], "papaya")
+  fmt.Printf("fruits8 => %#v\n", fruits8)
+
+
+  // Backing array
+  var fruits9 = []string{"pear", "pineapple", "raspberry", "redcurrant", "salak"}
+
+  var fruits91 = fruits9[2:4]
+
+  fruits91[0] = "rambutan"
+
+  fmt.Println("Fruits9 =>", fruits9)
+  fmt.Println("Fruits91 =>", fruits91)
+
+
+  // cap function
+  var fruits10 = []string{"starfruit", "strawberry", "yuzu", "apple"}
+  fmt.Println("Fruits10:", fruits10)
+  fmt.Println("Fruits10 len:", len(fruits10))
+  fmt.Println("Fruits10 cap:", cap(fruits10))
+
+  fmt.Println(strings.Repeat("#", 25))
+
+  var fruits102 = fruits10[0:3]
+  fmt.Println("Fruits102:", fruits102)
+  fmt.Println("Fruits102 len:", len(fruits102))
+  fmt.Println("Fruits102 cap:", cap(fruits102))
+
+  fmt.Println(strings.Repeat("#", 25))
+
+  var fruits103 = fruits10[1:]
+  fmt.Println("Fruits103:", fruits103)
+  fmt.Println("Fruits103 len:", len(fruits103))
+  fmt.Println("Fruits103 cap:", cap(fruits103))
+
+
+  // Creating a new backing array
+  cars := []string{"Ford", "Honda", "Audi", "RangeRover"}
+  newCars := []string{}
+
+  newCars = append(newCars, cars[0:2]...)
+
+  cars[0] = "Nissan"
+
+  fmt.Println("Cars:", cars)
+  fmt.Println("New Cars:", newCars)
 }
