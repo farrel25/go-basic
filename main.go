@@ -499,4 +499,105 @@ func main() {
 
   fmt.Println("Cars:", cars)
   fmt.Println("New Cars:", newCars)
+
+
+
+
+
+  /*
+    MAP
+  */
+  fmt.Println("\n\n")
+
+
+  // map
+  var person map[string]string // declaration
+  person = map[string]string{} // initialization
+
+  person["name"] = "Farrel"
+  person["age"] = "22"
+  person["address"] = "Semarang"
+
+  fmt.Println("Name:", person["name"])
+  fmt.Println("Age:", person["age"])
+  fmt.Println("Address:", person["address"])
+
+  var person2 map[string]string // declaration
+  person2 = map[string]string{
+    "name": "Putra",
+    "age": "23",
+    "address": "Semarang",
+  } // initialization
+
+  fmt.Println("Name:", person2["name"])
+  fmt.Println("Age:", person2["age"])
+  fmt.Println("Address:", person2["address"])
+
+
+  // Looping with map
+  for k, v := range person {
+    fmt.Println(k, ":", v)
+  }
+
+
+  // Deleting value
+  fmt.Println("Before deleting:", person)
+  delete(person, "age")
+  fmt.Println("After deleting:", person)
+
+
+  // Detecting a value
+  value3, exist := person2["age"]
+
+  if exist {
+    fmt.Println(value3)
+  } else {
+    fmt.Println("Value doesn't exist")
+  }
+
+  delete(person2, "age")
+
+  value3, exist = person2["age"]
+
+  if exist {
+    fmt.Println(value3)
+  } else {
+    fmt.Println("Value has been deleted")
+  }
+
+
+  // Combining slice with map
+  var people = []map[string]string {
+    {"name": "Farrel", "age": "21"},
+    {"name": "Atha", "age": "22"},
+    {"name": "Putra", "age": "23"},
+  }
+
+  for idx, person := range people {
+    fmt.Printf("Index: %d, name: %s, age: %s\n", idx, person["name"], person["age"])
+  }
+
+
+
+
+
+  /*
+    ALIASE
+  */
+  fmt.Println("\n\n")
+
+  // variable declaration with uint8 data type
+  var a uint8 = 10
+  var b byte // byte is an alias of the uint8 data type
+
+  b = a // no error occurs, because byte has the same data type as uint8
+  _ = b
+
+
+  // Declare the alias data type with a name that we create ourselves
+  // type alias_name = data_type_name
+  type second5 = uint
+
+  var hour second5 = 3600
+  fmt.Printf("hour type: %T\n", hour)
 }
