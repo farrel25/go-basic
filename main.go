@@ -557,7 +557,4 @@ outerLoop:
 	fmt.Printf("\nstr1 %s character length => %d\n", str1, utf8.RuneCountInString(str1))
 	fmt.Printf("str2 %s character length => %d\n", str2, utf8.RuneCountInString(str2))
 
-	for i, s := range str2 {
-		fmt.Printf("index: %d, string: %s, byte: %d\n", i, string(s), s)
-	}
 }
