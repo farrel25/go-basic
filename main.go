@@ -58,7 +58,7 @@ func main() {
 	fmt.Println(evenNumbers(numbers...))
 
 	// IIFE (immediately-invoked function expression)
-	fmt.Println("\n >> IIFE (immediately-invoked function expression)")
+	fmt.Println("\n\n >> IIFE (immediately-invoked function expression)")
 	var isPalindrome = func(word string) bool {
 		var reversedWord string
 
@@ -77,14 +77,14 @@ func main() {
 	fmt.Println("is Palindrom?", isPalindrome)
 
 	// Closure as a return value
-	fmt.Println("\n >> Closure as a return value")
+	fmt.Println("\n\n >> Closure as a return value")
 	studentList2 := []string{"Farrel", "Athaillah", "Putra", "Jihan", "Jana"}
 	find := findStudent(studentList2)
 	fmt.Println(find("PUTRA"))
 
 	// Callback
 	// Callback is a closure that is used as a parameter to a function
-	fmt.Println("\n >> Callback")
+	fmt.Println("\n\n >> Callback")
 	var numbers2 = []int{2, 5, 8, 10, 3, 99, 23}
 	var find2 = findOddNumbers(numbers2, func(i int) bool {
 		return i%2 != 0
@@ -92,12 +92,58 @@ func main() {
 	fmt.Println("Total odd numbers:", find2)
 
 	// Callback with parameter alias
-	fmt.Println("\n >> Callback with parameter alias")
+	fmt.Println("\n\n >> Callback with parameter alias")
 	var numbers3 = []int{2, 5, 8, 10, 3, 99, 23}
 	var find3 = findOddNumbers2(numbers3, func(i int) bool {
 		return i%2 != 0
 	})
 	fmt.Println("Total odd numbers:", find3)
+
+	/* <<< POINTER >>> */
+	fmt.Println("\n\n\n <<< POINTER >>> \n")
+
+	// create a pointer
+	var number1 *int
+	var number2 *int
+	_, _ = number1, number2
+
+	// Memory address
+	fmt.Println(" >> Memory address")
+	var firstNumber int = 4
+	var secondNumber *int = &firstNumber
+	fmt.Println("firstNumber (value)		:", firstNumber)
+	fmt.Println("firstNumber (memory address)	:", &firstNumber)
+	fmt.Println("secondNumber (value)		:", *secondNumber)
+	fmt.Println("secondNumber (memory address)	:", secondNumber)
+
+	// Changing value through pointer
+	fmt.Println("\n\n >> Changing value through pointer")
+	var firstPerson string = "Farrel"
+	var secondPerson *string = &firstPerson
+
+	fmt.Println("firstPerson (value)		:", firstPerson)
+	fmt.Println("firstPerson (memory address)	:", &firstPerson)
+	fmt.Println("secondPerson (value)		:", *secondPerson)
+	fmt.Println("secondPerson (memory address)	:", secondPerson)
+
+	fmt.Println("\n", strings.Repeat("#", 30), "\n")
+
+	*secondPerson = "Putra"
+	fmt.Println("firstPerson (value)		:", firstPerson)
+	fmt.Println("firstPerson (memory address)	:", &firstPerson)
+	fmt.Println("secondPerson (value)		:", *secondPerson)
+	fmt.Println("secondPerson (memory address)	:", secondPerson)
+
+	// Pointer as a parameter
+	fmt.Println("\n\n >> Pointer as a parameter")
+	var a int = 10
+	fmt.Println("Before (value)		:", a)
+	fmt.Println("Before (memory address)	:", &a)
+
+	changeValue(&a)
+
+	fmt.Println("Before (value)		:", a)
+	fmt.Println("Before (memory address)	:", &a)
 }
 
 /* <<< FUNCTION >>> */
@@ -237,4 +283,11 @@ func findOddNumbers2(numbers []int, callback isOddNum) int {
 	}
 
 	return totalOddNumbers
+}
+
+/* <<< POINTER >>> */
+
+// Pointer as a parameter
+func changeValue(number *int) {
+	*number = 20
 }
