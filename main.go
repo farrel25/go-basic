@@ -4,7 +4,12 @@ import (
 	"fmt"
 	"math"
 	"strings"
+	"unicode/utf8"
 )
+
+/* <<< CLOSURE >>> */
+// Callback with parameter alias
+type isOddNum func(int) bool
 
 func main() {
 	/* <<< FUNCTION >>> */
@@ -36,9 +41,66 @@ func main() {
 	profile("Farrel", "Rendang", "Fried rice", "Mcd", "KFC")
 
 	/* <<< CLOSURE >>> */
-	fmt.Println("\n <<< CLOSURE >>> \n")
+	fmt.Println("\n\n\n <<< CLOSURE >>> \n")
+
+	// Declare closure in variable
+	fmt.Println(" >> Declare closure in variable")
+	var evenNumbers = func(numbers ...int) []int {
+		var result []int
+		for _, num := range numbers {
+			if num%2 == 0 {
+				result = append(result, num)
+			}
+		}
+		return result
+	}
+	var numbers = []int{4, 93, 77, 10, 52, 22, 34}
+	fmt.Println(evenNumbers(numbers...))
+
+	// IIFE (immediately-invoked function expression)
+	fmt.Println("\n >> IIFE (immediately-invoked function expression)")
+	var isPalindrome = func(word string) bool {
+		var reversedWord string
+
+		// for i := len(word) - 1; i >= 0; i-- {
+		for i := utf8.RuneCountInString(word) - 1; i >= 0; i-- {
+			reversedWord += string(word[i])
+			fmt.Println("byte:", word[i], ", value:", string(word[i]), ", reversed word:", reversedWord)
+		}
+
+		// for _, v := range word {
+		// 	fmt.Println("byte:", v, "value:", string(v))
+		// }
+
+		return word == reversedWord
+	}("katak")
+	fmt.Println("is Palindrom?", isPalindrome)
+
+	// Closure as a return value
+	fmt.Println("\n >> Closure as a return value")
+	studentList2 := []string{"Farrel", "Athaillah", "Putra", "Jihan", "Jana"}
+	find := findStudent(studentList2)
+	fmt.Println(find("PUTRA"))
+
+	// Callback
+	// Callback is a closure that is used as a parameter to a function
+	fmt.Println("\n >> Callback")
+	var numbers2 = []int{2, 5, 8, 10, 3, 99, 23}
+	var find2 = findOddNumbers(numbers2, func(i int) bool {
+		return i%2 != 0
+	})
+	fmt.Println("Total odd numbers:", find2)
+
+	// Callback with parameter alias
+	fmt.Println("\n >> Callback with parameter alias")
+	var numbers3 = []int{2, 5, 8, 10, 3, 99, 23}
+	var find3 = findOddNumbers2(numbers3, func(i int) bool {
+		return i%2 != 0
+	})
+	fmt.Println("Total odd numbers:", find3)
 }
 
+/* <<< FUNCTION >>> */
 func greet(name string, age int8) {
 	fmt.Printf("Hello there! my name is %s, and I'm %d years old", name, age)
 }
@@ -124,4 +186,55 @@ func profile(name string, favFoods ...string) {
 
 	fmt.Println("Hello there! My name is", name)
 	fmt.Println("I really love to eat", mergeFavFoods)
+}
+
+/* <<< CLOSURE >>> */
+
+// Closure as a return value
+func findStudent(students []string) func(string) string {
+	return func(s string) string {
+		var student string
+		var position int
+
+		for i, v := range students {
+			if strings.ToLower(s) == strings.ToLower(v) {
+				student = v
+				position = i + 1
+				break
+			}
+		}
+
+		if student == "" {
+			return fmt.Sprintf("%s doesn't exist!!!", s)
+		}
+
+		return fmt.Sprintf("We found %s at number %d", student, position)
+	}
+}
+
+// Callback
+// Callback is a closure that is used as a parameter to a function
+func findOddNumbers(numbers []int, callback func(int) bool) int {
+	var totalOddNumbers int
+
+	for _, v := range numbers {
+		if callback(v) {
+			totalOddNumbers += 1
+		}
+	}
+
+	return totalOddNumbers
+}
+
+// Callback with parameter alias
+func findOddNumbers2(numbers []int, callback isOddNum) int {
+	var totalOddNumbers int
+
+	for _, v := range numbers {
+		if callback(v) {
+			totalOddNumbers += 1
+		}
+	}
+
+	return totalOddNumbers
 }
