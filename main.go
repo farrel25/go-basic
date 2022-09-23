@@ -7,6 +7,9 @@ import (
 )
 
 func main() {
+	/* <<< FUNCTION >>> */
+	fmt.Println("\n <<< FUNCTION >>> \n")
+
 	greet("Farrel", 22)
 
 	greet2("Farrel", "Semarang")
@@ -31,6 +34,9 @@ func main() {
 	fmt.Println("Result:", result)
 
 	profile("Farrel", "Rendang", "Fried rice", "Mcd", "KFC")
+
+	/* <<< CLOSURE >>> */
+	fmt.Println("\n <<< CLOSURE >>> \n")
 }
 
 func greet(name string, age int8) {
