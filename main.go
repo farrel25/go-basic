@@ -11,6 +11,25 @@ import (
 // Callback with parameter alias
 type isOddNum func(int) bool
 
+/* <<< STRUCT >>> */
+// Create a struct
+type Employee struct {
+	name     string
+	age      int
+	division string
+}
+
+// Embedded struct
+type Person struct {
+	name string
+	age  int
+}
+
+type Employee2 struct {
+	division string
+	person   Person
+}
+
 func main() {
 	/* <<< FUNCTION >>> */
 	fmt.Println("\n <<< FUNCTION >>> \n")
@@ -144,6 +163,104 @@ func main() {
 
 	fmt.Println("Before (value)		:", a)
 	fmt.Println("Before (memory address)	:", &a)
+
+	/* <<< STRUCT >>> */
+	fmt.Println("\n\n\n <<< STRUCT >>> \n")
+
+	// Giving value to a struct
+	fmt.Println(" >> Giving value to a struct")
+	var employee Employee
+
+	employee.name = "Farrel"
+	employee.age = 22
+	employee.division = "Product Manager"
+
+	fmt.Println(employee.name)
+	fmt.Println(employee.age)
+	fmt.Println(employee.division)
+
+	// Initializing struct
+	fmt.Println("\n\n >> Initializing struct")
+	var employee1 = Employee{}
+	employee1.name = "Atha"
+	employee1.age = 23
+	employee1.division = "Backend Engineer"
+
+	var employee2 = Employee{name: "Putra", age: 24, division: "Data Engineer"}
+
+	fmt.Printf("Employee1: %v\n", employee1)
+	fmt.Printf("Employee2: %+v\n", employee2) // %+v in this case is to format a struct to a string
+
+	// Pointer to a struct
+	fmt.Println("\n\n >> Pointer to a struct")
+	var employee3 = Employee{name: "Farrel", age: 25, division: "Product Manager"}
+	var employee4 = &employee3
+
+	fmt.Println("employee3 name:", employee3.name)
+	fmt.Println("employee4 name:", employee4.name)
+
+	fmt.Println("\n", strings.Repeat("#", 30), "\n")
+	employee4.name = "Atha"
+
+	fmt.Println("employee3 name:", employee3.name)
+	fmt.Println("employee4 name:", employee4.name)
+
+	// Embedded struct
+	fmt.Println("\n\n >> Embedded struct")
+	var employee5 = Employee2{}
+	employee5.person.name = "Farrel"
+	employee5.person.age = 22
+	employee5.division = "Java Developer"
+	fmt.Printf("%+v\n", employee5)
+
+	// Anonymous struct
+	fmt.Println("\n\n >> Anonymous struct")
+	// Anonymous struct without field filling
+	var employee6 = struct {
+		person   Person
+		division string
+	}{}
+	employee6.person = Person{name: "Putra", age: 21}
+	employee6.division = "Data Scientist"
+
+	// Anonymous struct with field filling
+	var employee7 = struct {
+		person   Person
+		division string
+	}{
+		person:   Person{name: "Farrel", age: 26},
+		division: "CEO",
+	}
+
+	fmt.Printf("Employee6: %+v\n", employee6)
+	fmt.Printf("Employee7: %+v\n", employee7)
+
+	// Slice of struct
+	fmt.Println("\n\n >> Slice of struct")
+	var people = []Person{
+		{name: "Farrel", age: 22},
+		{name: "Atha", age: 23},
+		{name: "Putra", age: 24},
+	}
+	for _, v := range people {
+		fmt.Printf("%+v\n", v)
+		fmt.Printf("%+v\n", v.name)
+		fmt.Printf("%+v\n", v.age)
+	}
+
+	// Slice of anonymous struct
+	fmt.Println("\n\n >> Slice of anonymous struct")
+	var employee8 = []struct {
+		person   Person
+		division string
+	}{
+		{person: Person{name: "Farrel", age: 22}, division: "Associate Product Manager"},
+		{person: Person{name: "Atha", age: 23}, division: "Data Analyst"},
+		{person: Person{name: "Putra", age: 24}, division: "Software Engineer"},
+	}
+	for _, v := range employee8 {
+		fmt.Printf("%+v\n", v)
+	}
 }
 
 /* <<< FUNCTION >>> */
