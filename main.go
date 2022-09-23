@@ -532,6 +532,9 @@ outerLoop:
 	for i := 0; i < len(city); i++ {
 		fmt.Printf("index: %d, byte: %d\n", i, city[i])
 	}
+	for i, v := range city {
+		fmt.Println("index:", i, ", value:", string(v), "byte:", v)
+	}
 
 	var city2 []byte = []byte{74, 97, 107, 97, 114, 116, 97}
 
