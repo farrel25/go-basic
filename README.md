@@ -21,5 +21,5 @@ Spesifikasi:
 5. Kalian bisa menggunakan os.Args untuk mendapatkan argument pada terminal.
 
 ## References
-1. [branch chapter-1-2]
-2. [branch chapter-3]
+1. [branch chapter-1-2](https://github.com/farrel25/go-basic/tree/chapter-1-2)
+2. [branch chapter-3](https://github.com/farrel25/go-basic/tree/chapter-3)
