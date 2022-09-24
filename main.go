@@ -5,6 +5,8 @@ import (
 	"math"
 	"strings"
 	"unicode/utf8"
+
+	"github.com/farrel25/go-basic/helpers"
 )
 
 /* <<< CLOSURE >>> */
@@ -261,6 +263,15 @@ func main() {
 	for _, v := range employee8 {
 		fmt.Printf("%+v\n", v)
 	}
+
+	/* <<< EXPORTED & UNEXPORTED >>> */
+	fmt.Println("\n\n\n <<< EXPORTED & UNEXPORTED >>> \n")
+
+	helpers.Greet()
+	// helpers.greet() // error:greet not exported by package helpers
+
+	var person = helpers.Person{}
+	person.InvokeGreet() // To call the greet function from the main.go file, we need to call the Invokegreet method
 }
 
 /* <<< FUNCTION >>> */
