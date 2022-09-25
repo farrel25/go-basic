@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func findStudent(id int) string {
-	var temp student
+	// var temp student
 	var isFound bool = false
 
 	if id < 1 {
@@ -14,9 +14,15 @@ func findStudent(id int) string {
 
 	for i, v := range students {
 		if id-1 == i {
-			temp = v
+			// temp = v
 			isFound = true
-			fmt.Printf("%+v\n", temp)
+			// fmt.Printf("%+v\n", temp)
+			fmt.Println("\n\tSTUDENT DATA")
+			fmt.Println("id\t\t:", v.id)
+			fmt.Println("Name\t\t:", v.name)
+			fmt.Println("Address\t\t:", v.address)
+			fmt.Println("Occupation\t:", v.occupation)
+			fmt.Println("Reason\t\t:", v.reason)
 			break
 		}
 	}
@@ -25,5 +31,5 @@ func findStudent(id int) string {
 		return fmt.Sprintln("Student with id", id, "is not exist in database")
 	}
 
-	return "Success"
+	return ""
 }

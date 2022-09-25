@@ -7,7 +7,6 @@ import (
 )
 
 func main() {
-
 	var arg = os.Args[1]
 	inputId, _ := strconv.Atoi(arg)
 
