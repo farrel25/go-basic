@@ -110,6 +110,53 @@ func implementationOfInterface() {
 	}
 }
 
+func implementationOfEmptyInterface() {
+	/*
+		Empty interface is a data type that can accept any data type
+		in the Go language. Therefore, a variable with data type empty
+		interface can be assigned values with different data types.
+	*/
+	var randomValues interface{}
+	_ = randomValues
+	randomValues = "Semarang"
+	randomValues = 22
+	randomValues = true
+	randomValues = []string{"Farrel", "Putra"}
+
+	// Type assertion
+	var v interface{}
+	v = 20
+	// v *= 9 // ERROR : invalid operation: v *= 9 (mismatched types interface{} and int)
+	/*
+		we can only multiply the concrete or original int data type,
+		while the variable v has an empty interface data type
+		which is assigned a value of int data type.
+
+		To overcome the error, then we can do a type assertion
+	*/
+	if value, ok := v.(int); ok {
+		v = value * 9
+	}
+
+	// Map & Slice with Empty Interface
+	/*
+		When we declare a map and its values are assigned
+		an empty interface data type, then the map can have
+		values with different data types. Similar to slices
+		or arrays, when they are declared and their contents
+		are given the data type empty interface, the slices
+		or arrays can have values with different data types.
+	*/
+	rs := []interface{}{1, "Farrel", true, 2.4, "Putra", false}
+	rm := map[string]interface{}{
+		"name":   "Farrel",
+		"ntatus": true,
+		"age":    22,
+	}
+	_, _ = rs, rm
+}
+
 func main() {
 	implementationOfInterface()
+	implementationOfEmptyInterface()
 }
