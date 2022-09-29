@@ -1,8 +1,6 @@
 # Chapter 4
 
 ## Topics
-1. Interface
-2. Empty Interface
-3. Reflect
-4. Concurrency & Goroutines
-5. Waitgroup
+1. Channels
+2. Defer & Exit
+3. Error, Panic, & Recover
