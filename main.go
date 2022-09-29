@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"math"
 	"reflect"
+	"runtime"
+	"time"
 )
 
 /*
@@ -111,6 +113,8 @@ func implementationOfInterface() {
 	}
 }
 
+// =====================================================================
+
 func implementationOfEmptyInterface() {
 	/*
 		Empty interface is a data type that can accept any data type
@@ -157,6 +161,8 @@ func implementationOfEmptyInterface() {
 	_, _ = rs, rm
 }
 
+// =====================================================================
+
 func implementationOfReflect() {
 	fmt.Println("\n\n\n <<< Reflect >>> \n")
 	/*
@@ -192,9 +198,70 @@ func implementationOfReflect() {
 	fmt.Println("Variable value:", val)
 }
 
-func main() {
-	implementationOfInterface()
-	implementationOfEmptyInterface()
-	implementationOfReflect()
+// =====================================================================
 
+func goroutine() {
+	fmt.Println("Hello")
+}
+
+// Asynchronous process #1
+func firstProcess(number int) {
+	fmt.Println("firstProcess function started")
+	for i := 1; i <= number; i++ {
+		fmt.Println("i =", i)
+	}
+	fmt.Println("firstProcess function ended")
+}
+
+func secondProcess(number int) {
+	fmt.Println("secondProcess function started")
+	for j := 1; j <= number; j++ {
+		fmt.Println("j =", j)
+	}
+	fmt.Println("secondProcess function ended")
+}
+
+func implementationOfGoroutines() {
+	fmt.Println("\n\n\n <<< Concurrency & Goroutines >>> \n")
+	/*
+		Goroutines are asynchronous, so the process does
+		not wait for each other with other Goroutines
+	*/
+
+	// go goroutine()
+
+	// Asynchronous process #1
+	fmt.Println("\n >>> Asynchronous process #1 \n")
+	fmt.Println("Main execution started")
+
+	go firstProcess(8)
+	secondProcess(8)
+
+	fmt.Println("No. of Goroutines:", runtime.NumGoroutine())
+
+	time.Sleep(time.Second * 3)
+
+	fmt.Println("Main execution ended")
+	/*
+		If we pay attention, the firstProcess function does not
+		display the result. This happens because each Goroutine
+		works asynchronously (it means it won't wait until the
+		goroutine is finished) and one Goroutine will not wait
+		on another Goroutine.
+
+		there are 2 total goroutines running even though we only
+		run one function that is used as a goroutine. This happens
+		because of the fact that the main function is also a Goroutine,
+		so the main function will not wait for another Goroutine
+		to finish executing. This is the cause of the firstProcess
+		function not displaying the results even though the function
+		has actually been executed.
+	*/
+}
+
+func main() {
+	// implementationOfInterface()
+	// implementationOfEmptyInterface()
+	// implementationOfReflect()
+	implementationOfGoroutines()
 }
