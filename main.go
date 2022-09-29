@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"reflect"
 )
 
 /*
@@ -156,7 +157,44 @@ func implementationOfEmptyInterface() {
 	_, _ = rs, rm
 }
 
+func implementationOfReflect() {
+	fmt.Println("\n\n\n <<< Reflect >>> \n")
+	/*
+		Reflect is used to inspect variables, retrieve information from them or even manipulate them.
+	*/
+
+	// Identifying Data Type & Value
+	fmt.Println("\n >>> Identifying Data Type & Value \n")
+	var number = 23
+	var reflectValue = reflect.ValueOf(number) // returns an object of type reflect.Value, which contains information about the corresponding variable
+
+	fmt.Println("Reflect Value:", reflectValue)
+	fmt.Println("Variable type:", reflectValue.Type()) // returns the data type of the variable in the form of a string
+
+	// To display the reflect variable value, we must first make sure the data type
+	// Check the type of data type using the Kind() method
+	if reflectValue.Kind() == reflect.Int {
+		fmt.Println("\nreflectValue.Kind():", reflectValue.Kind())
+		fmt.Println("reflect.Int:", reflect.Int)
+		fmt.Println("Variable value:", reflectValue.Int())
+	}
+
+	// Accessing Value Using Interface Method
+	fmt.Println("\n\n >>> Accessing Value Using Interface Method \n")
+
+	fmt.Println("Variable value:", reflectValue.Interface()) // If the value is only required to be displayed to the output, you can use .Interface().
+
+	/*
+		The Interface() method returns an empty interface value or interface{}.
+		The original value itself can be accessed by casting the empty interface.
+	*/
+	var val = reflectValue.Interface().(int)
+	fmt.Println("Variable value:", val)
+}
+
 func main() {
 	implementationOfInterface()
 	implementationOfEmptyInterface()
+	implementationOfReflect()
+
 }
