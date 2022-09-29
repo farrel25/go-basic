@@ -5,6 +5,7 @@ import (
 	"math"
 	"reflect"
 	"runtime"
+	"sync"
 	"time"
 )
 
@@ -259,9 +260,49 @@ func implementationOfGoroutines() {
 	*/
 }
 
+// =====================================================================
+
+// Waitgroup is a struct of package sync, which is used to synchronize goroutines.
+
+/*
+The waitgroup in the printFruit function is a pointer,
+this needs to be done so that the waitgroup in the main
+and printFruit functions contains the same memory.
+*/
+func printFruit(index int, fruit string, wg *sync.WaitGroup) {
+	fmt.Printf("Index => %d, fruit => %s\n", index, fruit)
+	wg.Done() // to notify the waitgroup about the goroutine that has completed its processing
+}
+
+func implementationOfWaitgroup() {
+	fruits := []string{"apple", "mango", "durian", "avocado"}
+
+	var wg sync.WaitGroup
+
+	/*
+		The Add method is used to add the counter of the waitgroup.
+		The waitgroup counter is useful for informing the waitgroup
+		about the number of go routines to wait. Because we looped
+		4 times, it means that there are 4 go routines to wait for
+		before the main function stops executing
+	*/
+	for i, fruit := range fruits {
+		wg.Add(1)
+		go printFruit(i, fruit, &wg)
+	}
+
+	/*
+		The Wait method is useful for waiting for all the go routines
+		to complete their process, so the Wait method will hold the
+		main function until the entire go routine process is complete.
+	*/
+	wg.Wait()
+}
+
 func main() {
 	// implementationOfInterface()
 	// implementationOfEmptyInterface()
 	// implementationOfReflect()
-	implementationOfGoroutines()
+	// implementationOfGoroutines()
+	implementationOfWaitgroup()
 }
